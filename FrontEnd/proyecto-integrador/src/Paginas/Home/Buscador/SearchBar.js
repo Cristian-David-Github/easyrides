@@ -7,9 +7,10 @@ import { CiudadesContext } from "../../../Context/CiudadesContext";
 
 
 export const SearchBar = () => {
-  const urlCiudades = "http://localhost:8080/ciudades";
+  const urlCiudades = "http://ec2-3-145-197-27.us-east-2.compute.amazonaws.com:8080/ciudades";
   const { data } = useFetch(urlCiudades);
   // const [elegirCiudades, setElegirCiudades] = useState()
+  // context de busquedas que va a guardar elegirciudades y el resultado filtrado 
 
   const { elegirCiudades, setElegirCiudades } = useContext(CiudadesContext);
 
@@ -17,16 +18,14 @@ export const SearchBar = () => {
     setElegirCiudades(event.label);
   };
   
-
   return (
     <div className="searchBar">
-      {console.log(elegirCiudades)}
       <Select
         className="searchBar-individual"
         defaultValue={""}
         options={
           data &&
-          data.productos.map((ciudad) => ({
+          data.ciudad.map((ciudad) => ({
             label: ciudad.nombre,
             value: ciudad.id,
           }))
